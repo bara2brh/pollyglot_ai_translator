@@ -3,6 +3,7 @@ import CONFIG from "/config.js"
 const chatInput = document.getElementById('user-inpt');
 const sendBtn = document.getElementById('send-btn');
 const languageSelect = document.getElementById('language-select');
+const chatContainer = document.getElementById('chatbox')
 const openai = new OpenAI({
     apiKey: CONFIG.AI_KEY,
     baseURL: CONFIG.AI_URL,
@@ -10,17 +11,17 @@ const openai = new OpenAI({
 });
 
 sendBtn.addEventListener('click', async() => {
+    renderMessage(chatInput.value,true);
     sendBtn.disabled = true;
-    sendBtn.style.background="url('images/loading.gif')"
+    sendBtn.style.backgroundImage="url('images/loading2.gif')"
     await fetchTranslation();
     chatInput.value = "";
     sendBtn.disabled = false;
-    sendBtn.style.background="url('images/send-btn.png')"
+    sendBtn.style.backgroundImage="url('images/send-btn.png')"
 
 });
 
 async function fetchTranslation() {
-    console.log("fun run")
     const response = await openai.responses.create({
         model: CONFIG.AI_MODEL,
         input: [
@@ -47,6 +48,25 @@ async function fetchTranslation() {
             }
         ]
     });
-    console.log(response.output_text)
+    renderMessage(response.output_text,false);
+
+}
+
+function renderMessage(message , isUser = false){
+    if (isUser){
+        chatContainer.innerHTML+=`
+         <div class="user-msg chat">
+                <p>${message}</p>
+            </div>
+        `
+    }
+    else{
+        chatContainer.innerHTML+=`
+         <div class="ai-msg chat">
+                <p>${message}</p>
+            </div>
+        `
+    }
+
 
 }
