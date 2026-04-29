@@ -57,6 +57,7 @@ select {
     background-size: 20px;
     font-weight: 500;
     background-color: #F5F5F5;
+    cursor: pointer;
 
 }
 
@@ -71,7 +72,15 @@ main{
     border: 2px solid #252F42;
     justify-self: center;
     border-radius: 10px;
-    padding:  2rem 0.65rem ;
+    padding:  1rem 0.65rem ;
+    min-height: 60vh;
+    max-height: 100%;
+}
+.chatbox {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow-y: scroll;
 
 }
 
@@ -79,10 +88,13 @@ main{
     margin-bottom: 1.25rem;
     padding: 1.15rem;
     color: white;
+    font-weight: 500;
 }
 .ai-msg{
     background-color: #035a9d;
     border-radius: 20px 0px 20px 20px;
+    width: 95%;
+    align-self: flex-end;
 }
 .ai-msg p , .user-msg p {
     overflow:auto;
@@ -93,5 +105,43 @@ main{
 .user-msg{
     background-color: #65da65;
     border-radius: 0px 20px 20px 20px; 
+    color: #333333;
+    width: 95%;
+}
+
+.input-container{
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    justify-self: flex-end;
+    background-color: #F5F5F5;
+    border: 1.5px solid #586E88;
+    padding: 1rem;
+    border-radius: 10px;
+}
+.input-container input{
+    width: 100%;
+    padding: 0rem 0.5rem;
+    border: none;
+    background-color: transparent;
+    height: 100%;
+    font-size: 1rem;
+}
+.input-container input:focus{
+    outline: none;
+}
+
+#send-btn{
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: none;
+    background-image: url(images/send-btn.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor:pointer;
+    align-self: flex-end;
+    margin-bottom: 1px;
+    color: #333333;
 }
 
