@@ -10,18 +10,24 @@ const openai = new OpenAI({
     dangerouslyAllowBrowser: true
 });
 
-sendBtn.addEventListener('click', async() => {
-    renderMessage(chatInput.value,true);
+
+function isArabic(text) {
+    return /[\u0600-\u06FF]/.test(text);
+}
+
+sendBtn.addEventListener('click', async () => {
+    renderMessage(chatInput.value, true);
     sendBtn.disabled = true;
-    sendBtn.style.backgroundImage="url('images/loading2.gif')"
+    sendBtn.style.backgroundImage = "url('images/loading2.gif')"
     await fetchTranslation();
     chatInput.value = "";
     sendBtn.disabled = false;
-    sendBtn.style.backgroundImage="url('images/send-btn.png')"
+    sendBtn.style.backgroundImage = "url('images/send-btn.png')"
 
 });
 
 async function fetchTranslation() {
+    const selectedLanguageText = languageSelect.selectedOptions[0].text;
     const response = await openai.responses.create({
         model: CONFIG.AI_MODEL,
         input: [
@@ -44,29 +50,31 @@ async function fetchTranslation() {
             },
             {
                 role: "user",
-                content: `Target language: ${languageSelect.value}\nText:\n${chatInput.value}`
+                content: `Target language: ${selectedLanguageText}\nText:\n${chatInput.value}`
             }
         ]
     });
-    renderMessage(response.output_text,false);
+    renderMessage(response.output_text, false);
 
 }
 
-function renderMessage(message , isUser = false){
-    if (isUser){
-        chatContainer.innerHTML+=`
-         <div class="user-msg chat">
+function renderMessage(message, isUser = false) {
+    const arabic = isArabic(message);
+    const langClass = arabic ? "Arabic" : "";
+
+    if (isUser) {
+        chatContainer.innerHTML += `
+            <div class="user-msg chat ${langClass}">
                 <p>${message}</p>
             </div>
-        `
-    }
-    else{
-        chatContainer.innerHTML+=`
-         <div class="ai-msg chat">
+        `;
+    } else {
+        chatContainer.innerHTML += `
+            <div class="ai-msg chat ${langClass}">
                 <p>${message}</p>
             </div>
-        `
+        `;
     }
 
-
+    chatContainer.scrollTop = chatContainer.scrollHeight;
 }
