@@ -5,3 +5,38 @@
     font-family: "Poppins", sans-serif;
 
 }
+
+header{
+    display: flex;
+    background-color: #0d182e;
+    background-image: url("images/bg.png");
+    background-size: cover;
+    height: 200px;
+    justify-content: center;
+    align-content: center;
+    margin: 0;
+    padding: 3rem 2.5rem;
+    gap: 1rem;
+}
+
+.header-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+header img{
+    width: 100px;
+    height: 100px;
+}
+.header-text h1{
+    color: #32CD32;
+    font-size: 2.5rem;
+}
+.header-text h2{
+    color: white;
+    font-weight: 500;
+    font-size: 0.75rem;
+}
+
+
