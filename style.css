@@ -56,9 +56,42 @@ select {
     background: url("images/down-arrow.png") 95% center no-repeat;
     background-size: 20px;
     font-weight: 500;
+    background-color: #F5F5F5;
 
 }
 
 select:focus {
     outline: none;
 }
+
+main{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    border: 2px solid #252F42;
+    justify-self: center;
+    border-radius: 10px;
+    padding:  2rem 0.65rem ;
+
+}
+
+.chat{
+    margin-bottom: 1.25rem;
+    padding: 1.15rem;
+    color: white;
+}
+.ai-msg{
+    background-color: #035a9d;
+    border-radius: 20px 0px 20px 20px;
+}
+.ai-msg p , .user-msg p {
+    overflow:auto;
+    text-wrap: wrap;
+    width: 100%;
+}
+
+.user-msg{
+    background-color: #65da65;
+    border-radius: 0px 20px 20px 20px; 
+}
+
